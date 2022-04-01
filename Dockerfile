@@ -9,11 +9,17 @@ RUN yum update -y && yum install -y centos-release-advanced-virtualization && yu
     libguestfs-devel \
     && yum clean all
 
+# Create tarball for the appliance. This fixed libguestfs appliance uses the root in qcow2 format as container runtime not always handle correctly sparse files. This appliance can be extracted and copied directly in the container image.
 RUN mkdir -p /output \
-    && cd /output \
-    && libguestfs-make-fixed-appliance --xz \
+    mkdir -p /appliance \
+    && libguestfs-make-fixed-appliance /appliance \
+    && cd /appliance \
+    && mv root root.raw \
+    && qemu-img convert -c -O qcow2 root.raw root \
+    && rm root.raw \
     && KERNEL_VERSION=$(rpm -qa  kernel-core | sed 's/kernel-core-\(.*\)\.el8.*/\1/') \
     && LIBGUESTFS_VERSION=$(libguestfs-make-fixed-appliance --version | sed 's/libguestfs-make-fixed-appliance //') \
     && source /etc/os-release \
-    && mv appliance-${LIBGUESTFS_VERSION}.tar.xz appliance-${LIBGUESTFS_VERSION}-linux-${KERNEL_VERSION}-${ID}${VERSION_ID}.tar.xz \
+    && cd /output \
+    &&  tar -czvf  appliance-${LIBGUESTFS_VERSION}-linux-${KERNEL_VERSION}-${ID}${VERSION_ID}.tar.gz /appliance \
     && echo "appliance-${LIBGUESTFS_VERSION}-linux-${KERNEL_VERSION}-${ID}${VERSION_ID}" > latest-version.txt
