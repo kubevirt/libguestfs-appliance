@@ -16,6 +16,6 @@ RUN mkdir -p /output && \
     KERNEL_VERSION=$(rpm -qa kernel-core | sed 's/kernel-core-\(.*\)\.el9.*/\1/') && \
     LIBGUESTFS_VERSION=$(libguestfs-make-fixed-appliance --version | sed 's/libguestfs-make-fixed-appliance //') && \
     source /etc/os-release && \
-    APPLIANCE_NAME=appliance-${LIBGUESTFS_VERSION}-linux-${KERNEL_VERSION}-${ID}${VERSION_ID}.tar.xz && \
+    APPLIANCE_NAME=libguestfs-appliance-${LIBGUESTFS_VERSION}-linux-${KERNEL_VERSION}-${ID}${VERSION_ID}.tar.xz && \
     mv appliance-${LIBGUESTFS_VERSION}.tar.xz ${APPLIANCE_NAME} && \
     echo ${APPLIANCE_NAME} > latest-version.txt
