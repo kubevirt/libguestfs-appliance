@@ -17,4 +17,4 @@ RUN mkdir -p /output && \
     LIBGUESTFS_VERSION=$(libguestfs-make-fixed-appliance --version | sed 's/libguestfs-make-fixed-appliance //') && \
     source /etc/os-release && \
     mv appliance-${LIBGUESTFS_VERSION}.tar.xz appliance-${LIBGUESTFS_VERSION}-linux-${KERNEL_VERSION}-${ID}${VERSION_ID}.tar.xz && \
-    echo "appliance-${LIBGUESTFS_VERSION}-linux-${KERNEL_VERSION}-${ID}${VERSION_ID}" > latest-version.txt
+    echo "appliance-${LIBGUESTFS_VERSION}-linux-${KERNEL_VERSION}-${ID}${VERSION_ID}.tar.xz" > latest-version.txt
