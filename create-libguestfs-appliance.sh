@@ -1,6 +1,7 @@
 #!/bin/bash -xe
 
 IMAGE=${IMAGE:-libguestfs-appliance}
+VERSION=${VERSION:-$(date +"%y%m%d%H%M")-$(git rev-parse --short HEAD)}
 CONT_NAME=extract-libguestfs-appliance
 # Select an available container runtime
 if [ -z ${RUNTIME} ]; then
@@ -17,7 +18,7 @@ if [ -z ${RUNTIME} ]; then
 fi
 
 
-${RUNTIME} build --rm -t ${IMAGE}  .
+${RUNTIME} build --build-arg VERSION=${VERSION} --rm -t ${IMAGE} .
 ${RUNTIME} create --name ${CONT_NAME} ${IMAGE} sh
 ${RUNTIME} cp ${CONT_NAME}:/output .
 ${RUNTIME} rm ${CONT_NAME}
