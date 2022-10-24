@@ -9,9 +9,9 @@ Example:
 ```
 http_file(
     name = "libguestfs-appliance",
-    sha256 = "1be29201b2622078c90b0f2044d95da23f8f456cd0ed4421cca9b16266962479",
+    sha256 = "0e1d08363ddfb185f08b8d357b6a91bd5ca8f19455a2ca7e74bfd2c9990a0235",
     urls = [
-        "https://storage.googleapis.com/kubevirt-prow/devel/release/kubevirt/libguestfs-appliance/appliance-1.44.0-linux-5.11.22-100-fedora32.tar.xz",
+        "https://storage.googleapis.com/kubevirt-prow/devel/release/kubevirt/libguestfs-appliance/libguestfs-appliance-2210241731-1df853a.tar.xz",
     ],
 )
 ```
