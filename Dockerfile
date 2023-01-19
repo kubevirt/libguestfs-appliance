@@ -3,8 +3,6 @@ FROM quay.io/centos/centos:stream9
 ENV LIBGUESTFS_BACKEND direct
 
 RUN dnf update -y && \
-    dnf install -y dnf-plugins-core && \
-    dnf config-manager --enable crb && \
     dnf install -y --setopt=install_weak_deps=False \
         libguestfs \
         qemu-img && \
