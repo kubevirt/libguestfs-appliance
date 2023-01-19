@@ -7,7 +7,6 @@ RUN dnf update -y && \
     dnf config-manager --enable crb && \
     dnf install -y --setopt=install_weak_deps=False \
         libguestfs \
-        libguestfs-devel \
         qemu-img && \
     dnf clean -y all
 
