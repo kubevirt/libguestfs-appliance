@@ -7,7 +7,8 @@ RUN dnf update -y && \
     dnf config-manager --enable crb && \
     dnf install -y --setopt=install_weak_deps=False \
         libguestfs \
-        libguestfs-devel && \
+        libguestfs-devel \
+        qemu-img && \
     dnf clean -y all
 
 # Create tarball for the appliance. This fixed libguestfs appliance uses the root in qcow2 format as container runtime not always handle correctly sparse files. This appliance can be extracted and copied directly in the container image.
