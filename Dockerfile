@@ -5,6 +5,7 @@ ENV LIBGUESTFS_BACKEND direct
 RUN dnf update -y && \
     dnf install -y --setopt=install_weak_deps=False \
         libguestfs \
+        libguestfs-winsupport \
         qemu-img && \
     dnf clean -y all
 
