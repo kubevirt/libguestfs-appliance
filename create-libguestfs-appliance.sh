@@ -1,5 +1,6 @@
 #!/bin/bash -xe
 
+ARCHS="amd64 s390x"
 IMAGE=${IMAGE:-libguestfs-appliance}
 CONT_NAME=extract-libguestfs-appliance
 # Select an available container runtime
@@ -16,8 +17,9 @@ if [ -z ${RUNTIME} ]; then
     fi
 fi
 
-
-${RUNTIME} build --rm -t ${IMAGE}  .
-${RUNTIME} create --name ${CONT_NAME} ${IMAGE} sh
-${RUNTIME} cp ${CONT_NAME}:/output .
-${RUNTIME} rm ${CONT_NAME}
+for arch in $ARCHS; do 
+    ${RUNTIME} build --build-arg BUILD_ARCH="${arch}" --platform "linux/${arch}" --rm -t ${IMAGE}  .
+    ${RUNTIME} create --name ${CONT_NAME} ${IMAGE} sh
+    ${RUNTIME} cp ${CONT_NAME}:/output .
+    ${RUNTIME} rm ${CONT_NAME}
+done
