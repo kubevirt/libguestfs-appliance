@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 
-ARCHS="amd64 s390x"
+ARCHS="amd64 s390x arm64"
 IMAGE=${IMAGE:-libguestfs-appliance}
 CONT_NAME=extract-libguestfs-appliance
 # Select an available container runtime
